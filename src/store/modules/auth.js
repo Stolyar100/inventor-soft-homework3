@@ -3,7 +3,7 @@ const state = () => ({
 });
 
 const getters = {
-  isLoggedIn: state => state.isLoggedIn
+  isLoggedIn: (state) => state.isLoggedIn,
 };
 
 const actions = {
