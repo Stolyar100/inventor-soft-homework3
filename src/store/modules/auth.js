@@ -2,7 +2,9 @@ const state = () => ({
   isLoggedIn: localStorage.getItem("isLoggedIn") || false,
 });
 
-const getters = {};
+const getters = {
+  isLoggedIn: state => state.isLoggedIn
+};
 
 const actions = {
   async login({ commit }) {
