@@ -14,12 +14,13 @@ export default {
   },
 };
 </script>
-<style lang="scss" >
+<style lang="scss">
 .auth {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+
 .login {
   max-width: 250px;
   width: 100%;

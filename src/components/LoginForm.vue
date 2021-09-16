@@ -3,32 +3,44 @@
     <label class="login__label default-el"
       ><input
         class="login__input"
-        v-model="login"
+        v-model="username"
         type="text"
-        placeholder="login"
+        placeholder="username"
     /></label>
     <label class="login__label default-el"
       ><input
         class="login__input"
         v-model="password"
-        type="text"
+        type="password"
         placeholder="login"
     /></label>
-    <button class="login__btn default-el" @click="loginUser">Login</button>
+    <button class="login__btn default-el" @click="loginSubmit">Login</button>
   </div>
 </template>
 
 <script>
+import { mapActions } from "vuex";
+
+const userLogin = "admin";
+const userPassword = "admin";
 export default {
   name: "Home",
   data() {
     return {
-      login: "",
+      username: "",
       password: "",
     };
   },
   methods: {
-    loginUser() {},
+    ...mapActions(["login"]),
+    async loginSubmit() {
+      if (this.username === userLogin && this.password === userPassword) {
+        await this.login();
+        return this.$router.push({ name: "Home" });
+      }
+      this.username = "";
+      this.password = "";
+    },
   },
 };
 </script>
@@ -53,6 +65,8 @@ export default {
   &__input {
     border: 0;
     width: 100%;
+    outline: none;
+    background: transparent;
   }
 }
 </style>
