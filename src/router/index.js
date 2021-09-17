@@ -1,6 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "@/views/Home.vue";
+import Auth from "@/views/Auth.vue";
 import store from "@/store/index";
 
 Vue.use(VueRouter);
@@ -9,13 +9,12 @@ const routes = [
   {
     path: "/",
     name: "Home",
-    component: Home,
-    meta: { requiresAuth: true },
+    component: () => import("@/views/Home.vue"),
   },
   {
     path: "/auth",
     name: "Auth",
-    component: () => import("../views/Auth.vue"),
+    component: Auth,
   },
 ];
 
@@ -24,16 +23,14 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  if (to.matched.some((record) => record.meta.requiresAuth)) {
-    if (!store.getters.isLoggedIn) {
-      next({ name: "Auth" });
-    }
+  if (!store.getters.isLoggedIn && to.name !== "Auth") {
+    next({ name: "Auth" });
   }
   next();
 });
 
 router.beforeEach((to, from, next) => {
-  if (to.name === "Auth" && store.getters.isLoggedIn) {
+  if (store.getters.isLoggedIn && to.name === "Auth") {
     next({ name: "Home" });
   }
   next();

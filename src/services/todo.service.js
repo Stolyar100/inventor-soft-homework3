@@ -1,7 +1,7 @@
 import $axios from "@/core/api.configuration";
 
 class TodoService {
-  getTodo() {
+  getTodos() {
     return $axios.get("/todos");
   }
 }
