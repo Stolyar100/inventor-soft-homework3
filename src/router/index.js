@@ -26,11 +26,8 @@ router.beforeEach((to, from, next) => {
   if (!store.getters.isLoggedIn && to.name !== "Auth") {
     next({ name: "Auth" });
   }
-  next();
-});
-
-router.beforeEach((to, from, next) => {
   if (store.getters.isLoggedIn && to.name === "Auth") {
+    debugger;
     next({ name: "Home" });
   }
   next();
